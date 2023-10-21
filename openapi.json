@@ -1,0 +1,178 @@
+{
+  "info": {
+    "title": "Tspec API",
+    "version": "0.0.1"
+  },
+  "openapi": "3.0.3",
+  "paths": {
+    "/member/info": {
+      "get": {
+        "operationId": "MemberApiSpec_get_/member/info",
+        "tags": [
+          "Member"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Member"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{id}": {
+      "get": {
+        "operationId": "BookApiSpec_get_/books/{id}",
+        "tags": [
+          "도서"
+        ],
+        "summary": "단일 도서 조회",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "도서 정보",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Member": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "type": "number"
+          },
+          "defaultGroupId": {
+            "type": "number"
+          },
+          "starredGroupId": {
+            "type": "number"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "img": {
+            "type": "string"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "inOrOut": {
+            "type": "number"
+          },
+          "locate": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "signUpDate": {
+            "type": "string"
+          },
+          "evaling": {
+            "type": "number"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "evalDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "createTime",
+          "defaultGroupId",
+          "evalDate",
+          "evaling",
+          "groups",
+          "img",
+          "inOrOut",
+          "level",
+          "locate",
+          "location",
+          "msg",
+          "signUpDate",
+          "starredGroupId",
+          "updateTime"
+        ]
+      },
+      "Book": {
+        "description": "도서 정보",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "도서 ID",
+            "type": "number"
+          },
+          "title": {
+            "description": "도서명",
+            "example": "상수리 나무 아래",
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "tags",
+          "title"
+        ]
+      },
+      "Tag": {
+        "enum": [
+          "로맨스",
+          "판타지"
+        ],
+        "type": "string"
+      }
+    }
+  }
+}
